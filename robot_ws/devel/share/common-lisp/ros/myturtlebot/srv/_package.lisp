@@ -1,0 +1,10 @@
+(cl:defpackage myturtlebot-srv
+  (:use )
+  (:export
+   "TURTLEBOTSTATUS"
+   "<TURTLEBOTSTATUS-REQUEST>"
+   "TURTLEBOTSTATUS-REQUEST"
+   "<TURTLEBOTSTATUS-RESPONSE>"
+   "TURTLEBOTSTATUS-RESPONSE"
+  ))
+

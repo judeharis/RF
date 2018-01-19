@@ -54,14 +54,20 @@ driving_forward = False
 change_time = rospy.Time.now()
 rate = rospy.Rate(10)
 
+stoptwistcounter = 0
+
 while not rospy.is_shutdown():
     if driving_forward:
-# We need to continually publish a stream of velocity command messages, since most mobile base drivers will time out and stop the robot if they do not receive at least several messages per second.
         cmd_vel_pub.publish(go_twist)
         if rs.range_value < 0.8 and rs.range_value > 0 :
             driving_forward = False;
             rospy.loginfo("0.8 Turn at " + str(rs.range_value))
     else:
+        if rs.range_value > 0.8 or rs.range_value == 0 and stoptwistcounter == 0:
+            driving_forward = True;
+            rospy.loginfo("0.8 Moving" + str(rs.range_value))
+        if stoptwistcounter > 0:
+            stoptwistcounter-=1
         cmd_vel_pub.publish(stop_twist)
 
 # This branch checks the system time and toggles it periodically.
@@ -72,7 +78,7 @@ while not rospy.is_shutdown():
             rospy.loginfo("GO!")
         else:
             rospy.loginfo("STOP TWIST!")
-            
+            stoptwistcounter = 20
         change_time = rospy.Time.now() + rospy.Duration(5)
        
 

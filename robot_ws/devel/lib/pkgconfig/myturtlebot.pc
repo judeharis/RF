@@ -3,6 +3,6 @@ prefix=/home/rflab/robot_ws/devel
 Name: myturtlebot
 Description: Description of myturtlebot
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/rflab/robot_ws/devel/include
 Libs: -L/home/rflab/robot_ws/devel/lib 
 Requires: 
