@@ -45,7 +45,7 @@ rospy.init_node('wander_service')
 range_sensor = ReadScan()
 scan_sub = rospy.Subscriber('scan', LaserScan, range_sensor.scan_callback)
 cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
-status_srv = rospy.Service('turtlebot_status',  QueryRange, range_sensor.service_callback)
+status_srv = rospy.Service('turtlebot_status',  TurtlebotStatus, range_sensor.service_callback)
 
 
 
